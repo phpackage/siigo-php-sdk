@@ -51,7 +51,7 @@ final class Client
      * @param array $data
      * @param array $headers
      * @param array $options
-     * @return array|null
+     * @return mixed|null
      * @throws InternalException
      */
     public function get(
@@ -69,7 +69,7 @@ final class Client
      * @param array $data
      * @param array $headers
      * @param array $options
-     * @return array|null
+     * @return mixed|null
      * @throws InternalException
      */
     private function request(
@@ -78,7 +78,7 @@ final class Client
         array $data = [],
         array $headers = [],
         array $options = []
-    ): ?array {
+    ) {
         $this->login();
 
         try {
@@ -89,18 +89,18 @@ final class Client
             throw new RequestException($exception);
         }
 
-        if ($response->success
+        if (
+            $response->success
             && 200 === $response->status_code
-            && is_array($body = json_decode($response->body, true))
         ) {
-            return $body;
+            return json_decode($response->body, true);
         }
 
-        if (400 === $response->status_code) {
+        if ($response->status_code >= 400 && $response->status_code < 500) {
             throw new ClientException($response);
         }
 
-        if (500 === $response->status_code) {
+        if ($response->status_code >= 500) {
             throw new ServerException($response);
         }
 
@@ -110,7 +110,7 @@ final class Client
     /**
      * @throws AuthenticationException
      */
-    private function login()
+    private function login(): void
     {
         if (isset($this->session->headers['Authorization'])) {
             return;
@@ -135,6 +135,7 @@ final class Client
                 'ABA08B6A-B56C-40A5-90CF-7C1E54891B61',
             ]);
         } catch (Requests_Exception $exception) {
+            $auth = [];
         }
 
         $response = Requests::post(
@@ -150,7 +151,8 @@ final class Client
 
         $body = json_decode($response->body, true);
 
-        if (is_array($body)
+        if (
+            is_array($body)
             && isset($body['access_token'])
             && is_string($body['access_token'])
             && !empty($body['access_token'])
@@ -168,7 +170,7 @@ final class Client
      * @param array $data
      * @param array $headers
      * @param array $options
-     * @return array|null
+     * @return mixed|null
      * @throws InternalException
      */
     public function post(

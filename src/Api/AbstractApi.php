@@ -23,4 +23,11 @@ abstract class AbstractApi
     {
         return $this->client;
     }
+
+    protected function getModelName(): string
+    {
+        $className = explode('\\', static::class);
+
+        return $className[count($className) - 1];
+    }
 }
