@@ -4,15 +4,16 @@ namespace Phpackage\Siigo\Api;
 
 use Phpackage\Siigo\Client;
 use Phpackage\Siigo\Exception\InternalException;
+use Phpackage\Siigo\Model\Product;
 
 final class Products extends AbstractApi
 {
     /**
-     * @param array $data
+     * @param Product $product
      * @return array|null
      * @throws InternalException
      */
-    public function create(array $data = [])
+    public function create(Product $product)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -20,7 +21,10 @@ final class Products extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Create?%s', $this->getModelName(), $query), $data);
+            ->post(
+                sprintf('%s/Create?%s', $this->getModelName(), $query),
+                $product->toArray()
+            );
     }
 
     /**
@@ -89,11 +93,11 @@ final class Products extends AbstractApi
     }
 
     /**
-     * @param array $data
+     * @param Product $product
      * @return array|null
      * @throws InternalException
      */
-    public function update(array $data = [])
+    public function update(Product $product)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -101,6 +105,9 @@ final class Products extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Update?%s', $this->getModelName(), $query), $data);
+            ->post(
+                sprintf('%s/Update?%s', $this->getModelName(), $query),
+                $product->toArray()
+            );
     }
 }
