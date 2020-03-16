@@ -7,157 +7,157 @@ final class Product implements Model
     use ArrayableModel;
 
     /**
-     * @var int|null
+     * @var int|null Identificador del producto (Parámetro de salida)
      */
     private $id;
 
     /**
-     * @var string|null
+     * @var string|null Código del producto
      */
     private $code;
 
     /**
-     * @var string|null
+     * @var string|null Nombre del producto
      */
     private $description;
 
     /**
-     * @var string|null
+     * @var string|null Referencia de fábrica
      */
     private $referenceManufactures;
 
     /**
-     * @var string|null
+     * @var string|null Tipo de producto: ProductType_Product, ProductType_Service, ProductType_Consumer
      */
     private $productTypeKey;
 
     /**
-     * @var string|null
+     * @var string|null Unidad de medida impresión factura
      */
     private $measureUnit;
 
     /**
-     * @var string|null
+     * @var string|null Código de barras
      */
     private $codeBars;
 
     /**
-     * @var string|null
+     * @var string|null Descripción larga
      */
     private $comments;
 
     /**
-     * @var int
+     * @var int ID de Impuesto cargo
      */
     private $taxAddID = 0;
 
     /**
-     * @var int
+     * @var int ID de Impuesto retención
      */
     private $taxDiscID = 0;
 
     /**
-     * @var bool
+     * @var bool True Es incluido, False No es incluido
      */
     private $isIncluded = false;
 
     /**
-     * @var float
+     * @var float Campo obsoleto
      */
     private $cost = 0;
 
     /**
-     * @var bool
+     * @var bool Maneja control de inventarios
      */
     private $isInventoryControl = false;
 
     /**
-     * @var int
+     * @var int Estado del producto: 0 = Inactivo 1 = Activo
      */
     private $state = 0;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 1
      */
     private $priceList1;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 2
      */
     private $priceList2;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 3
      */
     private $priceList3;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 4
      */
     private $priceList4;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 5
      */
     private $priceList5;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 6
      */
     private $priceList6;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 7
      */
     private $priceList7;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 8
      */
     private $priceList8;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 9
      */
     private $priceList9;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 10
      */
     private $priceList10;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 11
      */
     private $priceList11;
 
     /**
-     * @var float|null
+     * @var float|null Lista de precio 12
      */
     private $priceList12;
 
     /**
-     * @var string|null
+     * @var string|null Campo obsoleto
      */
     private $image;
 
     /**
-     * @var int|null
+     * @var int|null Grupo de inventario
      */
     private $accountGroupID;
 
     /**
-     * @var int
+     * @var int Campo obsoleto
      */
     private $subType = 0;
 
     /**
-     * @var int
+     * @var int ID de Impuesto cargo 2
      */
     private $taxAdd2ID = 0;
 
     /**
-     * @var float|null
+     * @var float|null Valor impoconsumo
      */
     private $taxImpoValue;
 
