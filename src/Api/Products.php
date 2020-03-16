@@ -40,7 +40,7 @@ final class Products extends AbstractApi
 
         return $this
             ->getClient()
-            ->delete(sprintf('%s/%s/Delete?%s', $this->getModelName(), $id, $query));
+            ->delete(sprintf('%s/Delete/%s?%s', $this->getModelName(), $id, $query));
     }
 
     /**

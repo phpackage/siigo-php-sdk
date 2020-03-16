@@ -4,15 +4,16 @@ namespace Phpackage\Siigo\Api;
 
 use Phpackage\Siigo\Client;
 use Phpackage\Siigo\Exception\InternalException;
+use Phpackage\Siigo\Model\Contact;
 
 final class Contacts extends AbstractApi
 {
     /**
-     * @param array $data
+     * @param Contact $contact
      * @return array|null
      * @throws InternalException
      */
-    public function create(array $data = [])
+    public function create(Contact $contact)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -20,7 +21,23 @@ final class Contacts extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Create?%s', $this->getModelName(), $query), $data);
+            ->post(sprintf('%s/Create?%s', $this->getModelName(), $query), $contact->toArray());
+    }
+
+    /**
+     * @param int $id
+     * @return array|null
+     * @throws InternalException
+     */
+    public function delete(int $id)
+    {
+        $query = http_build_query([
+            'namespace' => Client::NAMESPACE,
+        ]);
+
+        return $this
+            ->getClient()
+            ->delete(sprintf('%s/Delete/%s?%s', $this->getModelName(), $id, $query));
     }
 
     /**
@@ -57,6 +74,23 @@ final class Contacts extends AbstractApi
     }
 
     /**
+     * @param string $code
+     * @return array|null
+     * @throws InternalException
+     */
+    public function getByCode(string $code)
+    {
+        $query = http_build_query([
+            'code' => $code,
+            'namespace' => Client::NAMESPACE,
+        ]);
+
+        return $this
+            ->getClient()
+            ->get(sprintf('%s/GetByCode?%s', $this->getModelName(), $query));
+    }
+
+    /**
      * @param int $id
      * @return array|null
      * @throws InternalException
@@ -73,11 +107,11 @@ final class Contacts extends AbstractApi
     }
 
     /**
-     * @param array $data
+     * @param Contact $contact
      * @return array|null
      * @throws InternalException
      */
-    public function update(array $data = [])
+    public function update(Contact $contact)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -85,6 +119,6 @@ final class Contacts extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Update?%s', $this->getModelName(), $query), $data);
+            ->post(sprintf('%s/Update?%s', $this->getModelName(), $query), $contact->toArray());
     }
 }
