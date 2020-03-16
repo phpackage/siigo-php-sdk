@@ -17,7 +17,7 @@ final class Product implements Model
     private $code;
 
     /**
-     * @var string|null Nombre del producto
+     * @var string Nombre del producto
      */
     private $description;
 
@@ -142,7 +142,7 @@ final class Product implements Model
     private $image;
 
     /**
-     * @var int|null Grupo de inventario
+     * @var int Grupo de inventario
      */
     private $accountGroupID;
 
@@ -160,6 +160,19 @@ final class Product implements Model
      * @var float|null Valor impoconsumo
      */
     private $taxImpoValue;
+
+    private function __construct()
+    {
+    }
+
+    public static function create(string $description, int $accountGroupID)
+    {
+        $product = new self();
+        $product->description = $description;
+        $product->accountGroupID = $accountGroupID;
+
+        return $product;
+    }
 
     /**
      * @return int|null
@@ -198,9 +211,9 @@ final class Product implements Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -648,9 +661,9 @@ final class Product implements Model
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getAccountGroupID(): ?int
+    public function getAccountGroupID(): int
     {
         return $this->accountGroupID;
     }
