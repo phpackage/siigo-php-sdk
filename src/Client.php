@@ -81,6 +81,10 @@ final class Client
     ) {
         $this->login();
 
+        $options = array_merge([
+            'timeout' => 60,
+        ], $options);
+
         try {
             $response = $this
                 ->session
