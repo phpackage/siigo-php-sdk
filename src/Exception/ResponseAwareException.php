@@ -11,9 +11,9 @@ abstract class ResponseAwareException extends InternalException
      */
     private $response;
 
-    public function __construct(Requests_Response $response)
+    public function __construct(Requests_Response $response, string $message = '', int $code = 0)
     {
-        parent::__construct();
+        parent::__construct($message, $code);
         $this->response = $response;
     }
 
