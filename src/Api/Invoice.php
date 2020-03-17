@@ -4,6 +4,7 @@ namespace Phpackage\Siigo\Api;
 
 use Phpackage\Siigo\Client;
 use Phpackage\Siigo\Exception\InternalException;
+use Phpackage\Siigo\Model\Invoice as InvoiceModel;
 
 final class Invoice extends AbstractApi
 {
@@ -41,11 +42,11 @@ final class Invoice extends AbstractApi
     }
 
     /**
-     * @param array $data
+     * @param InvoiceModel $invoice
      * @return array|null
      * @throws InternalException
      */
-    public function save(array $data = [])
+    public function save(InvoiceModel $invoice)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -53,6 +54,6 @@ final class Invoice extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Save?%s', $this->getModelName(), $query), $data);
+            ->post(sprintf('%s/Save?%s', $this->getModelName(), $query), $invoice->toArray());
     }
 }
