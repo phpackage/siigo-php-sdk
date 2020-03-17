@@ -4,15 +4,16 @@ namespace Phpackage\Siigo\Api;
 
 use Phpackage\Siigo\Client;
 use Phpackage\Siigo\Exception\InternalException;
+use Phpackage\Siigo\Model\Account;
 
 final class Accounts extends AbstractApi
 {
     /**
-     * @param array $data
+     * @param Account $account
      * @return array|null
      * @throws InternalException
      */
-    public function create(array $data = [])
+    public function create(Account $account)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -20,7 +21,7 @@ final class Accounts extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Create?%s', $this->getModelName(), $query), $data);
+            ->post(sprintf('%s/Create?%s', $this->getModelName(), $query), $account->toArray());
     }
 
     /**
@@ -73,11 +74,30 @@ final class Accounts extends AbstractApi
     }
 
     /**
-     * @param array $data
+     * @param string $identification
+     * @param int $branchOffice
      * @return array|null
      * @throws InternalException
      */
-    public function update(array $data = [])
+    public function getByCode(string $identification, int $branchOffice = 0)
+    {
+        $query = http_build_query([
+            'identification' => $identification,
+            'branchOffice' => $branchOffice,
+            'namespace' => Client::NAMESPACE,
+        ]);
+
+        return $this
+            ->getClient()
+            ->get(sprintf('%s/GetByCode?%s', $this->getModelName(), $query));
+    }
+
+    /**
+     * @param Account $account
+     * @return array|null
+     * @throws InternalException
+     */
+    public function update(Account $account)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -85,6 +105,6 @@ final class Accounts extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Update?%s', $this->getModelName(), $query), $data);
+            ->post(sprintf('%s/Update?%s', $this->getModelName(), $query), $account->toArray());
     }
 }
