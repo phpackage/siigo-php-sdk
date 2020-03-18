@@ -30,7 +30,7 @@ class Phone implements Model
         return self::create(null, $number, null);
     }
 
-    public static function create(?int $indicative, ?int $number, ?int $extention)
+    public static function create(?int $indicative = null, ?int $number = null, ?int $extention = null)
     {
         $phone = new self();
         $phone->indicative = $indicative;

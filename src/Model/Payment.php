@@ -30,7 +30,7 @@ class Payment implements Model
     {
     }
 
-    public static function create(int $paymentMeansCode, float $value)
+    public static function create(int $paymentMeansCode, float $value = 0.0)
     {
         $payment = new self();
         $payment->paymentMeansCode = $paymentMeansCode;

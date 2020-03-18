@@ -7,7 +7,7 @@ class InvoiceHeader implements Model
     use ArrayableModel;
 
     /**
-     * @var int|null Identificador de la factura (Parámetro de salida)
+     * @var int Identificador de la factura (Parámetro de salida)
      */
     public $id;
 
@@ -27,7 +27,7 @@ class InvoiceHeader implements Model
     public $emailToSend;
 
     /**
-     * @var string|null Fecha de la factura. Formato yyyymmdd
+     * @var string Fecha de la factura. Formato yyyymmdd
      */
     public $docDate;
 
@@ -37,69 +37,69 @@ class InvoiceHeader implements Model
     public $moneyCode;
 
     /**
-     * @var float|null Valor en moneda extranjera
+     * @var float Valor en moneda extranjera
      */
-    public $exchangeValue;
+    public $exchangeValue = 0.0;
 
     /**
-     * @var float|null Valor descuentos
+     * @var float Valor descuentos
      */
-    public $discountValue;
+    public $discountValue = 0.0;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $vATTotalValue;
+    public $vATTotalValue = 0.0;
 
     /**
-     * @var float|null Valor total de Impuesto al consumo
+     * @var float Valor total de Impuesto al consumo
      */
-    public $consumptionTaxTotalValue;
+    public $consumptionTaxTotalValue = 0.0;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $taxDiscTotalValue;
+    public $taxDiscTotalValue = 0.0;
 
     /**
-     * @var int|null Valor Rete IVA
+     * @var int Valor Rete IVA
      */
-    public $retVATTotalID;
+    public $retVATTotalID = -1;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $retVATTotalPercentage;
+    public $retVATTotalPercentage = -1.0;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $retVATTotalValue;
+    public $retVATTotalValue = 0.0;
 
     /**
-     * @var int|null Valor Rete ICA
+     * @var int Valor Rete ICA
      */
-    public $retICATotalID;
+    public $retICATotalID = -1;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $retICATotalValue;
+    public $retICATotalValue = 0.0;
 
     /**
-     * @var float|null
+     * @var float
      */
-    public $retICATotaPercentage;
+    public $retICATotaPercentage = -1.0;
 
     /**
-     * @var float|null Total Neto = TotalValue = BaseValue + TaxAddValue + TaxAdd2Value - TaxDiscountValue
+     * @var float Total Neto = TotalValue = BaseValue + TaxAddValue + TaxAdd2Value - TaxDiscountValue
      */
-    public $totalValue;
+    public $totalValue = 0.0;
 
     /**
-     * @var float|null Total Bruto
+     * @var float Total Bruto
      */
-    public $totalBase;
+    public $totalBase = 0.0;
 
     /**
      * @var string|null Identificador del vendedor
@@ -109,7 +109,7 @@ class InvoiceHeader implements Model
     /**
      * @var string|null Observaciones de la factura
      */
-    public $observations;
+    public $observations = '';
 
     /**
      * @var Account|null
@@ -131,6 +131,19 @@ class InvoiceHeader implements Model
      */
     public $subCostCenterCode;
 
+    private function __construct()
+    {
+    }
+
+    public static function create(int $docCode, string $docDate)
+    {
+        $invoiceHeader = new self();
+        $invoiceHeader->docCode = $docCode;
+        $invoiceHeader->docDate = $docDate;
+
+        return $invoiceHeader;
+    }
+
     /**
      * @return int|null
      */
@@ -150,18 +163,18 @@ class InvoiceHeader implements Model
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getDocCode(): ?int
+    public function getDocCode(): int
     {
         return $this->docCode;
     }
 
     /**
-     * @param int|null $docCode
+     * @param int $docCode
      * @return InvoiceHeader
      */
-    public function setDocCode(?int $docCode): InvoiceHeader
+    public function setDocCode(int $docCode): InvoiceHeader
     {
         $this->docCode = $docCode;
         return $this;
@@ -204,18 +217,18 @@ class InvoiceHeader implements Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getDocDate(): ?string
+    public function getDocDate(): string
     {
         return $this->docDate;
     }
 
     /**
-     * @param string|null $docDate
+     * @param string $docDate
      * @return InvoiceHeader
      */
-    public function setDocDate(?string $docDate): InvoiceHeader
+    public function setDocDate(string $docDate): InvoiceHeader
     {
         $this->docDate = $docDate;
         return $this;
@@ -240,234 +253,234 @@ class InvoiceHeader implements Model
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getExchangeValue(): ?float
+    public function getExchangeValue(): float
     {
         return $this->exchangeValue;
     }
 
     /**
-     * @param float|null $exchangeValue
+     * @param float $exchangeValue
      * @return InvoiceHeader
      */
-    public function setExchangeValue(?float $exchangeValue): InvoiceHeader
+    public function setExchangeValue(float $exchangeValue): InvoiceHeader
     {
         $this->exchangeValue = $exchangeValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getDiscountValue(): ?float
+    public function getDiscountValue(): float
     {
         return $this->discountValue;
     }
 
     /**
-     * @param float|null $discountValue
+     * @param float $discountValue
      * @return InvoiceHeader
      */
-    public function setDiscountValue(?float $discountValue): InvoiceHeader
+    public function setDiscountValue(float $discountValue): InvoiceHeader
     {
         $this->discountValue = $discountValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getVATTotalValue(): ?float
+    public function getVATTotalValue(): float
     {
         return $this->vATTotalValue;
     }
 
     /**
-     * @param float|null $vATTotalValue
+     * @param float $vATTotalValue
      * @return InvoiceHeader
      */
-    public function setVATTotalValue(?float $vATTotalValue): InvoiceHeader
+    public function setVATTotalValue(float $vATTotalValue): InvoiceHeader
     {
         $this->vATTotalValue = $vATTotalValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getConsumptionTaxTotalValue(): ?float
+    public function getConsumptionTaxTotalValue(): float
     {
         return $this->consumptionTaxTotalValue;
     }
 
     /**
-     * @param float|null $consumptionTaxTotalValue
+     * @param float $consumptionTaxTotalValue
      * @return InvoiceHeader
      */
-    public function setConsumptionTaxTotalValue(?float $consumptionTaxTotalValue): InvoiceHeader
+    public function setConsumptionTaxTotalValue(float $consumptionTaxTotalValue): InvoiceHeader
     {
         $this->consumptionTaxTotalValue = $consumptionTaxTotalValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxDiscTotalValue(): ?float
+    public function getTaxDiscTotalValue(): float
     {
         return $this->taxDiscTotalValue;
     }
 
     /**
-     * @param float|null $taxDiscTotalValue
+     * @param float $taxDiscTotalValue
      * @return InvoiceHeader
      */
-    public function setTaxDiscTotalValue(?float $taxDiscTotalValue): InvoiceHeader
+    public function setTaxDiscTotalValue(float $taxDiscTotalValue): InvoiceHeader
     {
         $this->taxDiscTotalValue = $taxDiscTotalValue;
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getRetVATTotalID(): ?int
+    public function getRetVATTotalID(): int
     {
         return $this->retVATTotalID;
     }
 
     /**
-     * @param int|null $retVATTotalID
+     * @param int $retVATTotalID
      * @return InvoiceHeader
      */
-    public function setRetVATTotalID(?int $retVATTotalID): InvoiceHeader
+    public function setRetVATTotalID(int $retVATTotalID): InvoiceHeader
     {
         $this->retVATTotalID = $retVATTotalID;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getRetVATTotalPercentage(): ?float
+    public function getRetVATTotalPercentage(): float
     {
         return $this->retVATTotalPercentage;
     }
 
     /**
-     * @param float|null $retVATTotalPercentage
+     * @param float $retVATTotalPercentage
      * @return InvoiceHeader
      */
-    public function setRetVATTotalPercentage(?float $retVATTotalPercentage): InvoiceHeader
+    public function setRetVATTotalPercentage(float $retVATTotalPercentage): InvoiceHeader
     {
         $this->retVATTotalPercentage = $retVATTotalPercentage;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getRetVATTotalValue(): ?float
+    public function getRetVATTotalValue(): float
     {
         return $this->retVATTotalValue;
     }
 
     /**
-     * @param float|null $retVATTotalValue
+     * @param float $retVATTotalValue
      * @return InvoiceHeader
      */
-    public function setRetVATTotalValue(?float $retVATTotalValue): InvoiceHeader
+    public function setRetVATTotalValue(float $retVATTotalValue): InvoiceHeader
     {
         $this->retVATTotalValue = $retVATTotalValue;
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getRetICATotalID(): ?int
+    public function getRetICATotalID(): int
     {
         return $this->retICATotalID;
     }
 
     /**
-     * @param int|null $retICATotalID
+     * @param int $retICATotalID
      * @return InvoiceHeader
      */
-    public function setRetICATotalID(?int $retICATotalID): InvoiceHeader
+    public function setRetICATotalID(int $retICATotalID): InvoiceHeader
     {
         $this->retICATotalID = $retICATotalID;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getRetICATotalValue(): ?float
+    public function getRetICATotalValue(): float
     {
         return $this->retICATotalValue;
     }
 
     /**
-     * @param float|null $retICATotalValue
+     * @param float $retICATotalValue
      * @return InvoiceHeader
      */
-    public function setRetICATotalValue(?float $retICATotalValue): InvoiceHeader
+    public function setRetICATotalValue(float $retICATotalValue): InvoiceHeader
     {
         $this->retICATotalValue = $retICATotalValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getRetICATotaPercentage(): ?float
+    public function getRetICATotaPercentage(): float
     {
         return $this->retICATotaPercentage;
     }
 
     /**
-     * @param float|null $retICATotaPercentage
+     * @param float $retICATotaPercentage
      * @return InvoiceHeader
      */
-    public function setRetICATotaPercentage(?float $retICATotaPercentage): InvoiceHeader
+    public function setRetICATotaPercentage(float $retICATotaPercentage): InvoiceHeader
     {
         $this->retICATotaPercentage = $retICATotaPercentage;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTotalValue(): ?float
+    public function getTotalValue(): float
     {
         return $this->totalValue;
     }
 
     /**
-     * @param float|null $totalValue
+     * @param float $totalValue
      * @return InvoiceHeader
      */
-    public function setTotalValue(?float $totalValue): InvoiceHeader
+    public function setTotalValue(float $totalValue): InvoiceHeader
     {
         $this->totalValue = $totalValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTotalBase(): ?float
+    public function getTotalBase(): float
     {
         return $this->totalBase;
     }
 
     /**
-     * @param float|null $totalBase
+     * @param float $totalBase
      * @return InvoiceHeader
      */
-    public function setTotalBase(?float $totalBase): InvoiceHeader
+    public function setTotalBase(float $totalBase): InvoiceHeader
     {
         $this->totalBase = $totalBase;
         return $this;
@@ -492,18 +505,18 @@ class InvoiceHeader implements Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getObservations(): ?string
+    public function getObservations(): string
     {
         return $this->observations;
     }
 
     /**
-     * @param string|null $observations
+     * @param string $observations
      * @return InvoiceHeader
      */
-    public function setObservations(?string $observations): InvoiceHeader
+    public function setObservations(string $observations): InvoiceHeader
     {
         $this->observations = $observations;
         return $this;

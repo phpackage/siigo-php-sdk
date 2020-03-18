@@ -7,7 +7,7 @@ class InvoiceItem implements Model
     use ArrayableModel;
 
     /**
-     * @var string|null Código del producto
+     * @var string Código del producto
      */
     public $productCode;
 
@@ -17,34 +17,34 @@ class InvoiceItem implements Model
     public $description;
 
     /**
-     * @var float|null GrossValue = UnitValue * Quantity
+     * @var float GrossValue = UnitValue * Quantity
      */
-    public $grossValue;
+    public $grossValue = 0.0;
 
     /**
-     * @var float|null BaseValue = GrossValue – DiscountValue
+     * @var float BaseValue = GrossValue – DiscountValue
      */
-    public $baseValue;
+    public $baseValue = 0.0;
 
     /**
-     * @var int|null Cantidad
+     * @var int Cantidad
      */
-    public $quantity;
+    public $quantity = 0;
 
     /**
-     * @var float|null Valor unitario
+     * @var float Valor unitario
      */
-    public $unitValue;
+    public $unitValue = 0.0;
 
     /**
-     * @var float|null Valor de descuento
+     * @var float Valor de descuento
      */
-    public $discountValue;
+    public $discountValue = 0.0;
 
     /**
-     * @var float|null Porcentaje de descuento
+     * @var float Porcentaje de descuento
      */
-    public $discountPercentage;
+    public $discountPercentage = 0.0;
 
     /**
      * @var string|null Impuesto como el IVA o impuesto al consumo
@@ -52,19 +52,19 @@ class InvoiceItem implements Model
     public $taxAddName;
 
     /**
-     * @var int|null Id del impuesto
+     * @var int Id del impuesto
      */
-    public $taxAddId;
+    public $taxAddId = -1;
 
     /**
-     * @var float|null Valor del impuesto
+     * @var float Valor del impuesto
      */
-    public $taxAddValue;
+    public $taxAddValue = 0.0;
 
     /**
-     * @var float|null Porcentaje del impuesto
+     * @var float Porcentaje del impuesto
      */
-    public $taxAddPercentage;
+    public $taxAddPercentage = 0.0;
 
     /**
      * @var string|null Impuesto como la Retención en la Fuente
@@ -72,29 +72,29 @@ class InvoiceItem implements Model
     public $taxDiscountName;
 
     /**
-     * @var int|null Id del impuesto
+     * @var int Id del impuesto
      */
-    public $taxDiscountId;
+    public $taxDiscountId = -1;
 
     /**
-     * @var float|null Valor del impuesto
+     * @var float Valor del impuesto
      */
-    public $taxDiscountValue;
+    public $taxDiscountValue = 0.0;
 
     /**
-     * @var float|null Porcentaje del impuesto
+     * @var float Porcentaje del impuesto
      */
-    public $taxDiscountPercentage;
+    public $taxDiscountPercentage = 0.0;
 
     /**
-     * @var float|null TotalValue = BaseValue + TaxAddValue + TaxAdd2Value - TaxDiscountValue
+     * @var float TotalValue = BaseValue + TaxAddValue + TaxAdd2Value - TaxDiscountValue
      */
-    public $totalValue;
+    public $totalValue = 0.0;
 
     /**
-     * @var int|null Campo obsoleto
+     * @var int Campo obsoleto
      */
-    public $productSubType;
+    public $productSubType = 0;
 
     /**
      * @var string|null Impuesto como el IVA o impuesto al consumo
@@ -102,19 +102,19 @@ class InvoiceItem implements Model
     public $taxAdd2Name;
 
     /**
-     * @var int|null Id del impuesto
+     * @var int Id del impuesto
      */
-    public $taxAdd2Id;
+    public $taxAdd2Id = -1;
 
     /**
-     * @var float|null Valor del impuesto
+     * @var float Valor del impuesto
      */
-    public $taxAdd2Value;
+    public $taxAdd2Value = 0.0;
 
     /**
-     * @var float|null Porcentaje del impuesto
+     * @var float Porcentaje del impuesto
      */
-    public $taxAdd2Percentage;
+    public $taxAdd2Percentage = 0.0;
 
     /**
      * @var string|null Código de Bodega
@@ -126,19 +126,31 @@ class InvoiceItem implements Model
      */
     public $salesmanIdentification;
 
+    private function __construct()
+    {
+    }
+
+    public static function create(string $productCode)
+    {
+        $invoiceItem = new self();
+        $invoiceItem->productCode = $productCode;
+
+        return $invoiceItem;
+    }
+
     /**
-     * @return string|null
+     * @return string
      */
-    public function getProductCode(): ?string
+    public function getProductCode(): string
     {
         return $this->productCode;
     }
 
     /**
-     * @param string|null $productCode
+     * @param string $productCode
      * @return InvoiceItem
      */
-    public function setProductCode(?string $productCode): InvoiceItem
+    public function setProductCode(string $productCode): InvoiceItem
     {
         $this->productCode = $productCode;
         return $this;
@@ -163,108 +175,108 @@ class InvoiceItem implements Model
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getGrossValue(): ?float
+    public function getGrossValue(): float
     {
         return $this->grossValue;
     }
 
     /**
-     * @param float|null $grossValue
+     * @param float $grossValue
      * @return InvoiceItem
      */
-    public function setGrossValue(?float $grossValue): InvoiceItem
+    public function setGrossValue(float $grossValue): InvoiceItem
     {
         $this->grossValue = $grossValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getBaseValue(): ?float
+    public function getBaseValue(): float
     {
         return $this->baseValue;
     }
 
     /**
-     * @param float|null $baseValue
+     * @param float $baseValue
      * @return InvoiceItem
      */
-    public function setBaseValue(?float $baseValue): InvoiceItem
+    public function setBaseValue(float $baseValue): InvoiceItem
     {
         $this->baseValue = $baseValue;
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getQuantity(): ?int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
     /**
-     * @param int|null $quantity
+     * @param int $quantity
      * @return InvoiceItem
      */
-    public function setQuantity(?int $quantity): InvoiceItem
+    public function setQuantity(int $quantity): InvoiceItem
     {
         $this->quantity = $quantity;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getUnitValue(): ?float
+    public function getUnitValue(): float
     {
         return $this->unitValue;
     }
 
     /**
-     * @param float|null $unitValue
+     * @param float $unitValue
      * @return InvoiceItem
      */
-    public function setUnitValue(?float $unitValue): InvoiceItem
+    public function setUnitValue(float $unitValue): InvoiceItem
     {
         $this->unitValue = $unitValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getDiscountValue(): ?float
+    public function getDiscountValue(): float
     {
         return $this->discountValue;
     }
 
     /**
-     * @param float|null $discountValue
+     * @param float $discountValue
      * @return InvoiceItem
      */
-    public function setDiscountValue(?float $discountValue): InvoiceItem
+    public function setDiscountValue(float $discountValue): InvoiceItem
     {
         $this->discountValue = $discountValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getDiscountPercentage(): ?float
+    public function getDiscountPercentage(): float
     {
         return $this->discountPercentage;
     }
 
     /**
-     * @param float|null $discountPercentage
+     * @param float $discountPercentage
      * @return InvoiceItem
      */
-    public function setDiscountPercentage(?float $discountPercentage): InvoiceItem
+    public function setDiscountPercentage(float $discountPercentage): InvoiceItem
     {
         $this->discountPercentage = $discountPercentage;
         return $this;
@@ -289,54 +301,54 @@ class InvoiceItem implements Model
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getTaxAddId(): ?int
+    public function getTaxAddId(): int
     {
         return $this->taxAddId;
     }
 
     /**
-     * @param int|null $taxAddId
+     * @param int $taxAddId
      * @return InvoiceItem
      */
-    public function setTaxAddId(?int $taxAddId): InvoiceItem
+    public function setTaxAddId(int $taxAddId): InvoiceItem
     {
         $this->taxAddId = $taxAddId;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxAddValue(): ?float
+    public function getTaxAddValue(): float
     {
         return $this->taxAddValue;
     }
 
     /**
-     * @param float|null $taxAddValue
+     * @param float $taxAddValue
      * @return InvoiceItem
      */
-    public function setTaxAddValue(?float $taxAddValue): InvoiceItem
+    public function setTaxAddValue(float $taxAddValue): InvoiceItem
     {
         $this->taxAddValue = $taxAddValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxAddPercentage(): ?float
+    public function getTaxAddPercentage(): float
     {
         return $this->taxAddPercentage;
     }
 
     /**
-     * @param float|null $taxAddPercentage
+     * @param float $taxAddPercentage
      * @return InvoiceItem
      */
-    public function setTaxAddPercentage(?float $taxAddPercentage): InvoiceItem
+    public function setTaxAddPercentage(float $taxAddPercentage): InvoiceItem
     {
         $this->taxAddPercentage = $taxAddPercentage;
         return $this;
@@ -361,90 +373,90 @@ class InvoiceItem implements Model
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getTaxDiscountId(): ?int
+    public function getTaxDiscountId(): int
     {
         return $this->taxDiscountId;
     }
 
     /**
-     * @param int|null $taxDiscountId
+     * @param int $taxDiscountId
      * @return InvoiceItem
      */
-    public function setTaxDiscountId(?int $taxDiscountId): InvoiceItem
+    public function setTaxDiscountId(int $taxDiscountId): InvoiceItem
     {
         $this->taxDiscountId = $taxDiscountId;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxDiscountValue(): ?float
+    public function getTaxDiscountValue(): float
     {
         return $this->taxDiscountValue;
     }
 
     /**
-     * @param float|null $taxDiscountValue
+     * @param float $taxDiscountValue
      * @return InvoiceItem
      */
-    public function setTaxDiscountValue(?float $taxDiscountValue): InvoiceItem
+    public function setTaxDiscountValue(float $taxDiscountValue): InvoiceItem
     {
         $this->taxDiscountValue = $taxDiscountValue;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxDiscountPercentage(): ?float
+    public function getTaxDiscountPercentage(): float
     {
         return $this->taxDiscountPercentage;
     }
 
     /**
-     * @param float|null $taxDiscountPercentage
+     * @param float $taxDiscountPercentage
      * @return InvoiceItem
      */
-    public function setTaxDiscountPercentage(?float $taxDiscountPercentage): InvoiceItem
+    public function setTaxDiscountPercentage(float $taxDiscountPercentage): InvoiceItem
     {
         $this->taxDiscountPercentage = $taxDiscountPercentage;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTotalValue(): ?float
+    public function getTotalValue(): float
     {
         return $this->totalValue;
     }
 
     /**
-     * @param float|null $totalValue
+     * @param float $totalValue
      * @return InvoiceItem
      */
-    public function setTotalValue(?float $totalValue): InvoiceItem
+    public function setTotalValue(float $totalValue): InvoiceItem
     {
         $this->totalValue = $totalValue;
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getProductSubType(): ?int
+    public function getProductSubType(): int
     {
         return $this->productSubType;
     }
 
     /**
-     * @param int|null $productSubType
+     * @param int $productSubType
      * @return InvoiceItem
      */
-    public function setProductSubType(?int $productSubType): InvoiceItem
+    public function setProductSubType(int $productSubType): InvoiceItem
     {
         $this->productSubType = $productSubType;
         return $this;
@@ -469,54 +481,54 @@ class InvoiceItem implements Model
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getTaxAdd2Id(): ?int
+    public function getTaxAdd2Id(): int
     {
         return $this->taxAdd2Id;
     }
 
     /**
-     * @param int|null $taxAdd2Id
+     * @param int $taxAdd2Id
      * @return InvoiceItem
      */
-    public function setTaxAdd2Id(?int $taxAdd2Id): InvoiceItem
+    public function setTaxAdd2Id(int $taxAdd2Id): InvoiceItem
     {
         $this->taxAdd2Id = $taxAdd2Id;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxAdd2Value(): ?float
+    public function getTaxAdd2Value(): float
     {
         return $this->taxAdd2Value;
     }
 
     /**
-     * @param float|null $taxAdd2Value
+     * @param float $taxAdd2Value
      * @return InvoiceItem
      */
-    public function setTaxAdd2Value(?float $taxAdd2Value): InvoiceItem
+    public function setTaxAdd2Value(float $taxAdd2Value): InvoiceItem
     {
         $this->taxAdd2Value = $taxAdd2Value;
         return $this;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getTaxAdd2Percentage(): ?float
+    public function getTaxAdd2Percentage(): float
     {
         return $this->taxAdd2Percentage;
     }
 
     /**
-     * @param float|null $taxAdd2Percentage
+     * @param float $taxAdd2Percentage
      * @return InvoiceItem
      */
-    public function setTaxAdd2Percentage(?float $taxAdd2Percentage): InvoiceItem
+    public function setTaxAdd2Percentage(float $taxAdd2Percentage): InvoiceItem
     {
         $this->taxAdd2Percentage = $taxAdd2Percentage;
         return $this;

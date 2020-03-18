@@ -94,6 +94,17 @@ class Contact implements Model
         return $contact;
     }
 
+    public static function forInvoice(
+        string $email,
+        bool $isPrincipal = false
+    ) {
+        $contact = new self();
+        $contact->email = $email;
+        $contact->isPrincipal = $isPrincipal;
+
+        return $contact;
+    }
+
     /**
      * @return int|null
      */
