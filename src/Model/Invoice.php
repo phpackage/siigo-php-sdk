@@ -21,19 +21,25 @@ class Invoice implements Model
      */
     public $payments = [];
 
-    private function __construct()
+    public function __construct(InvoiceHeader $header)
     {
+        $this->header = $header;
     }
 
     public static function create(
         InvoiceHeader $header,
-        InvoiceItem $invoiceItem,
-        Payment $payment
+        ?InvoiceItem $invoiceItem = null,
+        ?Payment $payment = null
     ) {
-        $invoice = new Invoice();
-        $invoice->header = $header;
-        $invoice->items[] = $invoiceItem;
-        $invoice->payments[] = $payment;
+        $invoice = new Invoice($header);
+
+        if ($invoiceItem instanceof InvoiceItem) {
+            $invoice->items[] = $invoiceItem;
+        }
+
+        if ($payment instanceof Payment) {
+            $invoice->payments[] = $payment;
+        }
 
         return $invoice;
     }
