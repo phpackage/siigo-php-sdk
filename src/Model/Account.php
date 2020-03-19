@@ -141,6 +141,11 @@ class Account implements Model
      */
     public $principalContactID = 0;
 
+    /**
+     * @var string[] Responsabilidades Fiscales (Obligatorio para facturación electrónica)
+     */
+    public $fiscalResponsibilities = [];
+
     private function __construct()
     {
     }
@@ -674,6 +679,24 @@ class Account implements Model
     public function setPrincipalContactID(int $principalContactID): Account
     {
         $this->principalContactID = $principalContactID;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getFiscalResponsibilities(): array
+    {
+        return $this->fiscalResponsibilities;
+    }
+
+    /**
+     * @param string $fiscalResponsibility
+     * @return Account
+     */
+    public function addFiscalResponsibility(string $fiscalResponsibility): Account
+    {
+        $this->fiscalResponsibilities[] = $fiscalResponsibility;
         return $this;
     }
 }

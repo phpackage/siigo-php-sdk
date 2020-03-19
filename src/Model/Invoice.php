@@ -71,16 +71,6 @@ class Invoice implements Model
     }
 
     /**
-     * @param InvoiceItem[] $items
-     * @return Invoice
-     */
-    public function setItems(array $items): Invoice
-    {
-        $this->items = $items;
-        return $this;
-    }
-
-    /**
      * @param InvoiceItem $item
      * @return Invoice
      */
@@ -96,16 +86,6 @@ class Invoice implements Model
     public function getPayments(): array
     {
         return $this->payments;
-    }
-
-    /**
-     * @param Payment[] $payments
-     * @return Invoice
-     */
-    public function setPayments(array $payments): Invoice
-    {
-        $this->payments = $payments;
-        return $this;
     }
 
     /**
