@@ -161,6 +161,26 @@ final class Product implements Model
      */
     private $taxImpoValue;
 
+    /**
+     * @var string|null Modelo
+     */
+    private $model;
+
+    /**
+     * @var string|null Código arancelario (Factura de exportación)
+     */
+    private $tariff;
+
+    /**
+     * @var string|null Marca (Factura de exportación)
+     */
+    private $brand;
+
+    /**
+     * @var string|null Unidad de medida factura electrónica (Obligatorio para facturación electrónica)
+     */
+    private $measurementUnitCode;
+
     private function __construct()
     {
     }
@@ -729,6 +749,78 @@ final class Product implements Model
     public function setTaxImpoValue(?float $taxImpoValue): Product
     {
         $this->taxImpoValue = $taxImpoValue;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getModel(): ?string
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param string|null $model
+     * @return Product
+     */
+    public function setModel(?string $model): Product
+    {
+        $this->model = $model;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTariff(): ?string
+    {
+        return $this->tariff;
+    }
+
+    /**
+     * @param string|null $tariff
+     * @return Product
+     */
+    public function setTariff(?string $tariff): Product
+    {
+        $this->tariff = $tariff;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param string|null $brand
+     * @return Product
+     */
+    public function setBrand(?string $brand): Product
+    {
+        $this->brand = $brand;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMeasurementUnitCode(): ?string
+    {
+        return $this->measurementUnitCode;
+    }
+
+    /**
+     * @param string|null $measurementUnitCode
+     * @return Product
+     */
+    public function setMeasurementUnitCode(?string $measurementUnitCode): Product
+    {
+        $this->measurementUnitCode = $measurementUnitCode;
         return $this;
     }
 }
