@@ -59,11 +59,11 @@ final class Voucher extends AbstractApi
     }
 
     /**
-     * @param VoucherModel $contact
+     * @param VoucherModel $voucher
      * @return array|null
      * @throws InternalException
      */
-    public function save(VoucherModel $contact)
+    public function save(VoucherModel $voucher)
     {
         $query = http_build_query([
             'namespace' => Client::NAMESPACE,
@@ -71,6 +71,6 @@ final class Voucher extends AbstractApi
 
         return $this
             ->getClient()
-            ->post(sprintf('%s/Save?%s', $this->getModelName(), $query), $contact->toArray());
+            ->post(sprintf('%s/Save?%s', $this->getModelName(), $query), $voucher->toArray());
     }
 }
