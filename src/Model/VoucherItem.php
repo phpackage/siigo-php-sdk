@@ -134,4 +134,94 @@ class VoucherItem implements Model
         $this->aCAccountCode = $aCAccountCode;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getDuePrefix(): ?string
+    {
+        return $this->duePrefix;
+    }
+
+    /**
+     * @param string|null $duePrefix
+     * @return VoucherItem
+     */
+    public function setDuePrefix(?string $duePrefix): VoucherItem
+    {
+        $this->duePrefix = $duePrefix;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDueConsecutive(): ?int
+    {
+        return $this->dueConsecutive;
+    }
+
+    /**
+     * @param int|null $dueConsecutive
+     * @return VoucherItem
+     */
+    public function setDueConsecutive(?int $dueConsecutive): VoucherItem
+    {
+        $this->dueConsecutive = $dueConsecutive;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDueQuote(): ?int
+    {
+        return $this->dueQuote;
+    }
+
+    /**
+     * @param int|null $dueQuote
+     * @return VoucherItem
+     */
+    public function setDueQuote(?int $dueQuote): VoucherItem
+    {
+        $this->dueQuote = $dueQuote;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDueDate(): ?string
+    {
+        return $this->dueDate;
+    }
+
+    /**
+     * @param string|null $dueDate
+     * @return VoucherItem
+     */
+    public function setDueDate(?string $dueDate): VoucherItem
+    {
+        $this->dueDate = $dueDate;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int|null $order
+     * @return VoucherItem
+     */
+    public function setOrder(?int $order): VoucherItem
+    {
+        $this->order = $order;
+        return $this;
+    }
 }
