@@ -55,10 +55,10 @@ class VoucherItem implements Model
     {
     }
 
-    public static function create(string $productCode)
+    public static function create(float $value)
     {
         $voucherItem = new self();
-        $voucherItem->value = $productCode;
+        $voucherItem->value = $value;
 
         return $voucherItem;
     }
