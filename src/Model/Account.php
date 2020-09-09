@@ -691,12 +691,12 @@ class Account implements Model
     }
 
     /**
-     * @param string $fiscalResponsibility
+     * @param array $fiscalResponsibilityCodes
      * @return Account
      */
-    public function addFiscalResponsibility(string $fiscalResponsibility): Account
+    public function addFiscalResponsibility(array $fiscalResponsibilityCodes): Account
     {
-        $this->fiscalResponsibilities[] = $fiscalResponsibility;
+        $this->fiscalResponsibilities[] = $fiscalResponsibilityCodes;
         return $this;
     }
 }
