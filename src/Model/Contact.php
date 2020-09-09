@@ -75,24 +75,24 @@ class Contact implements Model
     {
     }
 
-    public static function create(
-        int $accountID,
-        string $email,
-        string $firstName,
-        string $lastName,
-        bool $isPrincipal = false,
-        int $gender = 2
-    ) {
-        $contact = new self();
-        $contact->accountID = $accountID;
-        $contact->email = $email;
-        $contact->firstName = $firstName;
-        $contact->lastName = $lastName;
-        $contact->isPrincipal = $isPrincipal;
-        $contact->gender = $gender;
+        public static function create(
+            int $accountID,
+            string $email,
+            string $firstName,
+            string $lastName,
+            bool $isPrincipal = false,
+            int $gender = 2
+        ) {
+            $contact = new self();
+            $contact->accountID = $accountID;
+            $contact->email = $email;
+            $contact->firstName = $firstName;
+            $contact->lastName = $lastName;
+            $contact->isPrincipal = $isPrincipal;
+            $contact->gender = $gender;
 
-        return $contact;
-    }
+            return $contact;
+        }
 
     public static function forInvoice(
         string $email,
