@@ -699,4 +699,14 @@ class Account implements Model
         $this->fiscalResponsibilities[] = $fiscalResponsibility;
         return $this;
     }
+
+    /**
+     * @param string[] $fiscalResponsibilityCodes
+     * @return Account
+     */
+    public function setFiscalResponsibilities(array $fiscalResponsibilityCodes): Account
+    {
+        $this->fiscalResponsibilities = $fiscalResponsibilityCodes;
+        return $this;
+    }
 }
